@@ -3000,7 +3000,7 @@ export async function scrapeBingrStream(params: {
                                 .replace(/\s*E\d+/gi, '')
                                 .replace(/\(.*\)/g, '')
                                 .trim();
-                            const found = await fetchAniListEpisodes({ title: cleanSearchTitle || effectiveTitle }).catch(() => null);
+                            const found = await fetchAniListEpisodes({ malId: malId || params.malId || undefined, title: cleanSearchTitle || effectiveTitle }).catch(() => null);
                             if (found && found.id) aniId = Number(found.id);
                         }
                         if (aniId) {
@@ -3041,7 +3041,7 @@ export async function scrapeBingrStream(params: {
                         .replace(/\s*E\d+/gi, '')
                         .replace(/\(.*\)/g, '')
                         .trim();
-                    const found = await fetchAniListEpisodes({ title: cleanSearchTitle || effectiveTitle }).catch(() => null);
+                    const found = await fetchAniListEpisodes({ malId: malId || params.malId || undefined, title: cleanSearchTitle || effectiveTitle }).catch(() => null);
                     if (found && found.id) aniId = Number(found.id);
                 }
                 if (aniId) {

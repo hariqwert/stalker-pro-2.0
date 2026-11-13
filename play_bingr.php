@@ -2512,13 +2512,13 @@ $imdbId = isset($_GET['imdbId']) ? $_GET['imdbId'] : (isset($_GET['imdb_id']) ? 
                     season: (MEDIA_TYPE === 'tv' || MEDIA_TYPE === 'anime') ? MEDIA_SEASON : undefined,
                     episode: (MEDIA_TYPE === 'tv' || MEDIA_TYPE === 'anime') ? MEDIA_EPISODE : undefined,
                     srv: serverId,
-                    strictSrv: isManual || Boolean(urlParams.get('srv')),
+                    strictSrv: isManual || (Boolean(urlParams.get('srv')) && urlParams.get('srv') === serverId),
                     malId: MAL_ID || undefined,
                     anilistId: ANILIST_ID || undefined
                 };
 
-                // Generous timeout for manual server selection (16s), fast 11s cascade in auto mode
-                const serverTimeoutMs = isManual ? 16000 : 11000;
+                // Generous timeout for anime and movie server resolution (24s manual, 20s auto)
+                const serverTimeoutMs = isManual ? 24000 : 20000;
                 const timeoutTimer = setTimeout(() => {
                     isTimedOut = true;
                     try { fetchCtrl.abort('timeout'); } catch(_) {}
