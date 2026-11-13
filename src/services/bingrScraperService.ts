@@ -3046,23 +3046,26 @@ export async function scrapeBingrStream(params: {
                 }
                 if (aniId) {
                     const isDubReq = (params as any).dub === true || (params as any).audio === 'dub' || (params as any).type === 'dub';
+                    const targetAudio = isDubReq ? 'dub' : 'sub';
+                    const altAudio = isDubReq ? 'sub' : 'dub';
 
-                    // Robust provider resolution: reanime targets reanime with cascade; anivexa/kitsune cascades all 9 top engines
-                    const fetchSub = serverId === 'reanime'
-                        ? fetchAnivexaWatch('reanime', aniId, 'sub', e).then(r => (!r.success || !r.streams?.length ? fetchAnivexaBestStream(aniId, e, 'sub') : r)).catch(() => fetchAnivexaBestStream(aniId, e, 'sub'))
-                        : fetchAnivexaBestStream(aniId, e, 'sub');
+                    const resolveTrack = async (audioTrack: 'sub' | 'dub') => {
+                        const r = await fetchAnivexaWatch('reanime', aniId, audioTrack, e).catch(() => null);
+                        if (r && r.success && r.streams?.length) return r;
+                        return fetchAnivexaBestStream(aniId, e, audioTrack);
+                    };
 
-                    const fetchDub = serverId === 'reanime'
-                        ? fetchAnivexaWatch('reanime', aniId, 'dub', e).then(r => (!r.success || !r.streams?.length ? fetchAnivexaBestStream(aniId, e, 'dub') : r)).catch(() => fetchAnivexaBestStream(aniId, e, 'dub'))
-                        : fetchAnivexaBestStream(aniId, e, 'dub');
+                    // 1. Resolve requested primary audio immediately
+                    const primaryAudioRes = await resolveTrack(targetAudio).catch(() => null);
 
-                    const [subRes, dubRes] = await Promise.all([
-                        fetchSub.catch(() => null),
-                        fetchDub.catch(() => null)
-                    ]);
-
-                    const primaryAudioRes = isDubReq ? (dubRes?.success && dubRes.streams.length > 0 ? dubRes : subRes) : (subRes?.success && subRes.streams.length > 0 ? subRes : dubRes);
-                    const secondaryAudioRes = primaryAudioRes === dubRes ? subRes : dubRes;
+                    // 2. Resolve alternate audio with a fast 3.5s timeout budget to never block playback
+                    let secondaryAudioRes: any = null;
+                    if (primaryAudioRes && primaryAudioRes.success && primaryAudioRes.streams.length > 0) {
+                        secondaryAudioRes = await Promise.race([
+                            resolveTrack(altAudio).catch(() => null),
+                            new Promise<null>((resolve) => setTimeout(() => resolve(null), 3500))
+                        ]);
+                    }
 
                     if (primaryAudioRes && primaryAudioRes.success && primaryAudioRes.streams.length > 0) {
                         scraperName = `Kitsune Anivexa (${primaryAudioRes.provider.toUpperCase()} 1080p)`;
