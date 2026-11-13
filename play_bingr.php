@@ -2107,7 +2107,7 @@ $imdbId = isset($_GET['imdbId']) ? $_GET['imdbId'] : (isset($_GET['imdb_id']) ? 
         if (MAL_ID && MEDIA_TYPE !== 'movie') saveStoredMalId(MAL_ID);
 
         const rawAnilistParam = urlParams.get('anilistId') || urlParams.get('anilist_id') || urlParams.get('anilist') || '<?php echo addslashes($anilistId); ?>';
-        let ANILIST_ID = (rawAnilistParam && !isNaN(parseInt(rawAnilistParam, 10))) ? parseInt(rawAnilistParam, 10) : (MEDIA_TYPE === 'anime' && !isNaN(parseInt(MEDIA_ID, 10)) ? parseInt(MEDIA_ID, 10) : null);
+        let ANILIST_ID = (rawAnilistParam && !isNaN(parseInt(rawAnilistParam, 10))) ? parseInt(rawAnilistParam, 10) : null;
         window.ANILIST_ID = ANILIST_ID;
 
         /* ---------------- ROBUST PLAY/PAUSE CONTROLLER & ABORT REJECTION SUPPRESSION ---------------- */
