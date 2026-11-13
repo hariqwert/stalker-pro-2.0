@@ -23,7 +23,7 @@ function envInt(name, fallback) {
 }
 
 // change CACHE_ENABLED=true in .env and set your upstash credentials to enable caching
-export const _CACHE_ENABLED = envBool("CACHE_ENABLED", false);
+export const _CACHE_ENABLED = envBool("CACHE_ENABLED", true);
 
 const IS_LOCAL_NODE = (() => {
   try {
