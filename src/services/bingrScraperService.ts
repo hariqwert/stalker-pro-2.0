@@ -2801,9 +2801,11 @@ export async function scrapeBingrStream(params: {
                 const isDub = (params as any).dub === true || (params as any).type === 'dub';
                 const megaRes = await resolveMegaPlayBuzzStream(effectiveTitle, e, isDub ? 'dub' : 'sub', s).catch(() => null);
                 if (megaRes && megaRes.success && megaRes.masterM3u8) {
+                    const proxiedM3u8 = megaRes.masterM3u8.startsWith('/') ? megaRes.masterM3u8 : `/stream_proxy.php?url=${encodeURIComponent(megaRes.masterM3u8)}`;
                     sources = [{
-                        url: megaRes.masterM3u8,
+                        url: proxiedM3u8,
                         rawUrl: megaRes.masterM3u8,
+                        proxyUrl: proxiedM3u8,
                         quality: '1080p Multi-Bitrate',
                         type: 'application/x-mpegurl',
                         label: `MegaPlay Buzz (${isDub ? 'English DUB' : 'Japanese SUB'})`,

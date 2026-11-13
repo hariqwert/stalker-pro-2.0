@@ -2984,6 +2984,8 @@ $imdbId = isset($_GET['imdbId']) ? $_GET['imdbId'] : (isset($_GET['imdb_id']) ? 
                 // Auto-proxy progressive videos on CDNs that enforce strict Referer or lack browser CORS headers
                 const isCorsExempt = !window._directNoProxyMode && (
                     rawUrl.includes('tokyoinsider.com') ||
+                    rawUrl.includes('googlevideo.com') ||
+                    rawUrl.includes('blogger.com') ||
                     rawUrl.includes('dash-hls-bridge') ||
                     rawUrl.includes('workers.dev') ||
                     rawUrl.startsWith(window.location.origin) ||
