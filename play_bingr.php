@@ -3039,6 +3039,8 @@ $imdbId = isset($_GET['imdbId']) ? $_GET['imdbId'] : (isset($_GET['imdb_id']) ? 
                     effectiveUrl = effectiveUrl.replace('/live.php?url=', '/stream_proxy.php?url=');
                 }
                 const isCorsReady = effectiveUrl.includes('dash-hls-bridge') ||
+                                    effectiveUrl.includes('dramahot.top') ||
+                                    effectiveUrl.includes('drama1.cfd') ||
                                     effectiveUrl.includes('workers.dev') ||
                                     effectiveUrl.includes('proxy-web-sage.vercel.app') ||
                                     effectiveUrl.includes('cloudfront.net') ||

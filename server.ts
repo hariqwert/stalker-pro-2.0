@@ -8928,10 +8928,14 @@ function getUpstreamProxyHeaders(targetUrlStr: string, clientIp?: string, reqHea
         headers['Origin'] = headers['Origin'] || 'https://megaplay.buzz';
     }
 
-    if (u.hostname.includes('dramahot') || u.hostname.includes('zokoanime')) {
+    if (u.hostname.includes('dramahot') || u.hostname.includes('zokoanime') || u.hostname.includes('drama1')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://zokoanime.video/';
-        delete headers['Origin'];
+        headers['Origin'] = 'https://zokoanime.video';
+    } else if (u.hostname.includes('googlevideo.com') || u.hostname.includes('blogger.com')) {
+        headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+        headers['Referer'] = 'https://www.blogger.com/';
+        headers['Origin'] = 'https://www.blogger.com';
     } else if (u.hostname.includes('ravok') || u.hostname.includes('as-cdn') || u.hostname.includes('animesalt')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = u.hostname.includes('ravok') ? 'https://ravok.buzz/' : (headers['Referer'] || 'https://animesalt.cx/');

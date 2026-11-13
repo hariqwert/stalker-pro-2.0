@@ -864,10 +864,14 @@ export async function streamUrl(url: string, headersArray: string[], req: Reques
         delete headers['cookie'];
         delete headers['X-User-Agent'];
         delete headers['x-user-agent'];
-    } else if (lowerUrlCheck.includes('dramahot') || lowerUrlCheck.includes('zokoanime')) {
+    } else if (lowerUrlCheck.includes('dramahot') || lowerUrlCheck.includes('zokoanime') || lowerUrlCheck.includes('drama1')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://zokoanime.video/';
-        delete headers['Origin'];
+        headers['Origin'] = 'https://zokoanime.video';
+    } else if (lowerUrlCheck.includes('googlevideo.com') || lowerUrlCheck.includes('blogger.com')) {
+        headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+        headers['Referer'] = 'https://www.blogger.com/';
+        headers['Origin'] = 'https://www.blogger.com';
     } else if (lowerUrlCheck.includes('ravok')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://ravok.buzz/';
@@ -887,10 +891,14 @@ export async function streamUrl(url: string, headersArray: string[], req: Reques
         delete headers['cookie'];
         delete headers['X-User-Agent'];
         delete headers['x-user-agent'];
-    } else if (lowerUrlCheck.includes('dramahot') || lowerUrlCheck.includes('zokoanime')) {
+    } else if (lowerUrlCheck.includes('dramahot') || lowerUrlCheck.includes('zokoanime') || lowerUrlCheck.includes('drama1')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://zokoanime.video/';
-        delete headers['Origin'];
+        headers['Origin'] = 'https://zokoanime.video';
+    } else if (lowerUrlCheck.includes('googlevideo.com') || lowerUrlCheck.includes('blogger.com')) {
+        headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+        headers['Referer'] = 'https://www.blogger.com/';
+        headers['Origin'] = 'https://www.blogger.com';
     } else if (lowerUrlCheck.includes('ravok')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://ravok.buzz/';
@@ -921,10 +929,14 @@ export async function streamUrl(url: string, headersArray: string[], req: Reques
         delete headers['cookie'];
         delete headers['X-User-Agent'];
         delete headers['x-user-agent'];
-    } else if (lowerUrlCheck.includes('dramahot') || lowerUrlCheck.includes('zokoanime')) {
+    } else if (lowerUrlCheck.includes('dramahot') || lowerUrlCheck.includes('zokoanime') || lowerUrlCheck.includes('drama1')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://zokoanime.video/';
-        delete headers['Origin'];
+        headers['Origin'] = 'https://zokoanime.video';
+    } else if (lowerUrlCheck.includes('googlevideo.com') || lowerUrlCheck.includes('blogger.com')) {
+        headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+        headers['Referer'] = 'https://www.blogger.com/';
+        headers['Origin'] = 'https://www.blogger.com';
     } else if (lowerUrlCheck.includes('ravok')) {
         headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
         headers['Referer'] = 'https://ravok.buzz/';
